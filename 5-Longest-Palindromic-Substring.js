@@ -1,20 +1,27 @@
-class Solution(object):
-    def longestPalindrome(self, s):
-        res = \\
-        for i in xrange(len(s)):
-            # odd case, like \aba\
-            tmp = self.helper(s, i, i)
-            if len(tmp) > len(res):
-                res = tmp
-            # even case, like \abba\
-            tmp = self.helper(s, i, i+1)
-            if len(tmp) > len(res):
-                res = tmp
-        return res
-    
-    # get the longest palindrome, l, r are the middle indexes   
-    # from inner to outer
-    def helper(self, s, l, r):
-        while l >= 0 and r < len(s) and s[l] == s[r]:
-            l -= 1; r += 1
-        return s[l+1:r]
+var check = function (s, i, j) {
+    while (i < j) {
+        if (s[i] !== s[j]) {
+            return false;
+        }
+        i++;
+        j--;
+    }
+    return true;
+}
+
+var longestPalindrome = function (s) {
+    const n = s.length;
+    let starting_index = 0;
+    let max_len = 0;
+    for (let i = 0; i < n; i++) {
+        for (let j = i; j < n; j++) {
+            if (check(s, i, j)) {
+                if (j - i + 1 > max_len) {
+                    max_len = j - i + 1;
+                    starting_index = i;
+                }
+            }
+        }
+    }
+    return s.substring(starting_index, starting_index + max_len);
+}
