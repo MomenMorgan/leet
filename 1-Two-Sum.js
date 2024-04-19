@@ -4,15 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-for(let i = 0; i< nums.length; i++)
+const obj = {}
+for(let i = 0; i < nums.length; i++)
 {
-    for(let j = i +1; j < nums.length; j++)
+    const complement = target -nums[i]   ;
+    if (obj.hasOwnProperty(complement ) === false )
     {
-        if (nums[i]+ nums[j] === target)
-        {
-            return [i,j];
-        }
-       
+        obj[nums[i]] = i;
+    }
+    else {
+        return [obj[complement], i];
     }
 }
 };
